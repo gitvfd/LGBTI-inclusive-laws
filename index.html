@@ -11,6 +11,8 @@ body{
 }
 
 .Heading{
+    display: block;
+	float:left;
 	width: 98%;
 	background:#CC0099;
 	color:#ffffff;
@@ -21,6 +23,8 @@ body{
 }
 
 .Heading2{
+    display: block;
+	float:left;
 	width: 98%;
 	background:#9C4174;
 	color:#ffffff;
@@ -31,6 +35,8 @@ body{
 }
 
 .Heading3{
+    display: block;
+	float:left;
 	width: 98%;
 	background:#6A189D;
 	color:#ffffff;
@@ -38,15 +44,6 @@ body{
 	font-size:14px ;
 	font-weight: 400;
 	padding-left:1%;
-}
-.Heading text{
-	padding-left: 1%;
-}
-.Heading2 text{
-	padding-left: 1%;
-}
-.Heading3 text{
-	padding-left: 1%;
 }
 
 #all{
@@ -116,7 +113,7 @@ clear: both; float: left; display: block; position: relative;
     display: block;
 	float:left;
 	font:Oswald;
-	font-size: 16px;
+	font-size: 15px;
 	color:#575757;
 }
 .sub{
@@ -273,6 +270,8 @@ height:15px;
 }
 
 </style>
+<script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+	crossorigin="anonymous"></script>
 <body id="page">
 <div class="title">
 </div>
@@ -433,7 +432,7 @@ height:15px;
 	</div>
 </div>
 <Br/>
-<div id="source"><a href="" target="_blank">Source</a>.</div>
+<div id="source"><a href="https://oe.cd/lgbti-2020" target="_blank">Source</a>.</div>
 
 <Br/>
 <Br/>
@@ -453,7 +452,7 @@ height:15px;
 var overallwidth=document.getElementById("page").offsetWidth;
 var height=45
 var width = overallwidth;
-var sideMargin=width/5;
+var sideMargin=width/10;
 var marginLeft=sideMargin;
 
 var marginRight=sideMargin;
@@ -481,27 +480,17 @@ var x = d3.scaleLinear()
 	//.domain([0,100])
     .rangeRound([marginLeft, width-marginRight]);
 
-/*var legend = d3.select("#Performers")
-	    	.append("svg")
-	    	.attr("width", width)
-	    	.attr("height",height/2);
-
-legend.append("text")
-.attr("x",width-marginRight)
-.attr("y",height/2.5)
-.attr("class","TitleSection")
-.attr("text-anchor","middle")
-.text("Top Performer")
-
-legend.append("text")
-.attr("x",marginLeft)
-.attr("y",height/2.5)
-.attr("class","TitleSection")
-.attr("text-anchor","middle")
-.text("Bottom Performer");*/
 
 function createComparison(topicSelected,countrySel){
-test="#"+topicSelected;
+
+
+	width = document.getElementById("page").offsetWidth;
+	sideMargin = width / 10;
+	marginLeft = sideMargin;
+	marginRight = sideMargin;
+
+	test="#"+topicSelected;
+	
 	d3.selectAll(test)
 		.selectAll("*")
 		.remove();
@@ -531,8 +520,6 @@ test="#"+topicSelected;
 	    			Country: d.Country,
 					value: d[topicSelected],
 					topic: topicSelected
-	    			//yearData:d[yTopic],
-	    			//evoData:d[evoTopic]
 	  			})
 	  		}	
 		});
@@ -541,7 +528,8 @@ test="#"+topicSelected;
 		var minValue=0,maxValue=1;
 		var min=d3.min(data,function(d){return parseFloat(d.value)})
 		var max = d3.max(data,function (d) { return parseFloat(d.value) })
-		x.domain([0,1]) ;
+		x.domain([0,1])
+			.rangeRound([marginLeft, width - marginRight]); ;
 
 
 		compChart.append("line")
@@ -651,6 +639,7 @@ test="#"+topicSelected;
 					return height/2-10;
 			})
 			.style("text-anchor","middle")
+			.style("fill", colorScale(pickSector(topicSelected)))
 			.text(function(d){
 				if (d.ISO == countrySel)
 					return d.Country + " :" + formatter(d.value) ;
@@ -672,6 +661,7 @@ test="#"+topicSelected;
 
 
 function highlightCountry(codeISO){
+
 	createComparison("Heading1",codeISO);
 	createComparison("Heading2-1",codeISO);
 	createComparison("indicator1",codeISO);
@@ -702,35 +692,8 @@ highlightCountry(selectedCou);
 
 
 
-function setupButtons() {
-    d3.select('#toolbar')
-      .selectAll('.button')
-      .on('click', function () {
-        // Remove active class from all buttons
-        d3.selectAll('.button').classed('active', false);
-        // Find the button just clicked
-        var button = d3.select(this);
-
-        // Set it as the active button
-        button.classed('active', true);
-
-        // Get the id of the button
-        var buttonId = button.attr('id');
-		if (buttonId== "radial")
-		window.open("index_radial.html", "_self")
-		else if (buttonId== "table")
-		window.open("index_table.html", "_self")
-
-
-		else if (buttonId== "comparison")
-		window.open("index.html", "_self")
-        // Toggle the bubble chart based on
-        // the currently clicked button.
-        //draw(buttonId);
-      });
-  }  
-    
-  setupButtons();
+ 
+	$(window).on('resize', function () { highlightCountry(selectedCou); });
 
 </script>
 <script>
