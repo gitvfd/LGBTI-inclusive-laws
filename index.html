@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i|Oswald:200,300,400,500,600,700&display=swap&subset=latin-ext"
+	rel="stylesheet">
+<style type="text/css">
+body{
+	background:#EDF8F6;  			
+	margin-right: 5%;
+	margin-left:5%;
+}
+
+.Heading{
+	width: 98%;
+	background:#CC0099;
+	color:#ffffff;
+	font-family:Oswald;
+	font-size:18px ;
+	font-weight: 400;
+	padding-left:1%;
+}
+
+.Heading2{
+	width: 98%;
+	background:#9C4174;
+	color:#ffffff;
+	font-family:Oswald;
+	font-size:16px ;
+	font-weight: 400;
+	padding-left:1%;
+}
+
+.Heading3{
+	width: 98%;
+	background:#6A189D;
+	color:#ffffff;
+	font-family:Oswald;
+	font-size:14px ;
+	font-weight: 400;
+	padding-left:1%;
+}
+.Heading text{
+	padding-left: 1%;
+}
+.Heading2 text{
+	padding-left: 1%;
+}
+.Heading3 text{
+	padding-left: 1%;
+}
+
+#all{
+	margin-top:10px;
+  	border-color: #CC0099;
+  	border-width: 2px;
+	border-style:solid;
+  padding:5px;
+}
+#general{
+
+	margin-top:10px;
+  	border-color: #9C4174;
+  	border-width: 2px;
+	border-style:solid;
+  	padding:5px;
+}
+#group-specific{
+	margin-top:10px;
+  	border-color: #6A189D;
+  	border-width: 2px;
+	border-style:solid;
+  	padding:5px;
+}
+
+.selector{
+
+	clear: both; float: left; display: block; position: relative;
+	font-family:Oswald;
+	font-size:14px ;
+	font-weight: bold;
+	color: #474747;
+	margin-top: 5px;
+	margin-bottom: 5px
+
+}
+.title{
+	font:Oswald;
+	font-size: 20px;
+	color:#8EA4B1;
+
+	margin-top:2px;
+	margin-bottom:1px;
+}
+
+.Explanation{
+clear: both; float: left; display: block; position: relative;
+	font:Oswald;
+	font-size: 18px;
+	font-style:italic;
+	color:#575757;
+	margin-top:5px;
+	margin-bottom:10px;
+    display: inline-block;
+}
+
+
+.compareChart{
+	clear: both; float: left; display: block; position: relative;
+	font:Oswald;
+	font-size: 18px;
+	color:#0297C9;
+	max-width: 100%;
+}
+
+.metadata{
+    display: block;
+	float:left;
+	font:Oswald;
+	font-size: 16px;
+	color:#575757;
+}
+.sub{
+	clear: both; 
+    display: block;
+	font:Oswald;
+	font-style: normal;
+	font-size: 12px;
+	color:#575757;
+}
+
+.TitleSection{
+	clear: both; 
+    display: block;
+	font:Oswald;
+	font-style: normal;
+	font-size: 14px;
+	color:#575757;
+}
+span{
+	display: block;
+}
+   
+.sector {
+clear: both; float: left; display: block; position: relative;
+font-family:Oswald;
+font-size: 1.75vw;
+/**color:#8EA4B1;**/
+margin-top: 3px;
+
+}
+
+#source{
+clear: both; float: left; display: block; position: relative;  
+  font:Oswald;
+  font-style: normal;
+  font-size: 12px;
+  color:#575757;
+  margin-top: 10px;
+}
+
+[tooltip]:before {
+    /* needed - do not touch */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #575757;font-family:Oswald;
+font-size: 12px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+}
+
+[tooltip]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+    
+    /* customizable */
+    background: rgb(252,252,252);
+    margin-top: -20px;
+    margin-left: 20px;    
+}
+
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}
+/* --- Tooltip --- */
+#countryTooltipSetUP {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: rgb(252,252,252);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+#countryTooltipSetUP.hidden {
+  display: none;
+}
+
+#countryTooltipSetUP p {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+#countryTooltip{
+  font-family: 'Oswald', sans-serif;
+  font-size: 17px;
+}
+
+#indicTooltip{
+	font-family: 'Oswald', sans-serif;
+  	font-size: 11px;
+}
+
+#valueTooltip{
+  font-size: 12px;
+}
+
+#evoTooltip{
+  font-size: 12px;
+}
+
+#imageTooltip{
+width:15px;
+height:15px;
+}
+
+
+.label{
+	font-family: 'Oswald', sans-serif;
+	color:#575757;
+  	font-size: 10px;
+}      
+
+.datalabel{
+	font-family: 'Oswald', sans-serif;
+	color:#575757;
+  	font-size: 9px;
+  	font-style: italic;
+}      
+
+
+#toolbar{
+    display: inline-block;
+}
+.button{
+  min-width: 130px;
+  padding: 4px 5px;
+  cursor: pointer;
+  text-align: center;
+  font: 14px  Oswald, Helvetica, Arial, sans-serif;
+  font-weight:400;
+  float:left;
+  margin: 2px 5px 2px 5px;
+  color:#464646;
+  border: 1px solid #e0e0e0;
+}
+
+.button.active {
+  background: #8EA4B1;
+  color: #fff;
+}
+
+</style>
+<body id="page">
+<div class="title">
+</div>
+<Br/>
+<div class="selector">Highlight a country: 
+<select id="dropDownButton" onchange="highlightCountry(this.value)";>
+	 <option value="AUS" selected="selected">Australia</option>
+	 <option value="AUT" >Austria</option>
+	 <option value="BEL" >Belgium</option>
+	 <option value="CAN" >Canada</option>
+	 <option value="CHL" >Chile</option>
+	 <option value="CZE" >Czech Republic</option>
+	 <option value="DNK" >Denmark</option>
+	 <option value="EST" >Estonia</option>
+	 <option value="FIN" >Finland</option>
+	 <option value="FRA" >France</option>
+	 <option value="DEU" >Germany</option>
+	 <option value="GRC" >Greece</option>
+	 <option value="ISL" >Iceland</option>
+	 <option value="IRL" >Ireland</option>
+	 <option value="ISR" >Israel</option>
+	 <option value="ITA" >Italy</option>
+	 <option value="JPN" >Japan</option>
+	 <option value="KOR" >Korea</option>
+	 <option value="LVA" >Latvia</option>
+	 <option value="LTU" >Lithuania</option>
+	 <option value="LUX" >Luxembourg</option>
+	 <option value="MEX" >Mexico</option>
+	 <option value="NLD" >Netherlands</option>
+	 <option value="NZL" >New Zealand</option>
+	 <option value= "NOR">Norway</option>
+	 <option value="POL" >Poland</option>
+	 <option value="PRT" >Portugal</option>
+	 <option value="SVK" >Slovak Republic</option>
+	 <option value="SVN" >Slovenia</option>
+	 <option value="ESP" >Spain</option>
+	 <option value="SWE" >Sweden</option>
+	 <option value="CHE" >Switzerland</option>
+	 <option value="TUR" >Turkey</option>
+	 <option value="GBR" >United Kingdom</option>
+	 <option value="USA" >United States</option>
+</select>
+</div>
+</Br>
+<!--<div class="sub"> Countries on the left hand side are <b>bottom performers</b> for the indicators while countries on the right hand side are <b>top performers</b>.-->
+</div>	
+</Br>
+
+<!--<div id="Performers"></div>-->
+<div class="sector" id="quantity" >
+	
+</div>
+	<div class="compareChart">
+		<div class="Heading" tooltip="Equal treatment of LGBTI people: General and group-specific provisions">LGBTI-inclusive laws:
+		All provisions (general and group-specific)
+		</div>
+		<span id="Heading1"></span>
+	</div>
+<div class="sector" id="all">
+	<div class="compareChart" >
+		<div class="Heading2" tooltip="Equal treatment of LGBTI people: General provisions">LGBTI-inclusive laws: General provisions
+		</div>
+		<span id="Heading2-1"></span>
+	</div>
+	<div class="compareChart" >
+		<div class="metadata" tooltip="Protection of LGBTI people against discrimination">Protection of LGBTI people against discrimination
+		</div>
+		<span id="indicator1"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Protection of LGBTI people's civil liberties">Protection of LGBTI people's civil liberties
+		</div>
+		<span id="indicator2"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Protection of LGBTI people against violence">Protection of LGBTI people against violence
+		</div>
+		<span id="indicator3"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Protection of LGBTI people fleeing persecution abroad">Protection of LGBTI asylum seekers
+		</div>
+		<span id="indicator4"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Existence of an LGBTI-inclusive equality body, ombudsman or human rights commission">LGBTI-inclusive equality body, ombudsman or human rights commission
+		</div>
+		<span id="indicator5"></span>
+	</div>
+</div>
+<div class="sector" id="general">
+	<div class="compareChart" >
+		<div class="Heading3" tooltip="Equal treatment of LGBTI people: Group-specific provisions">LGBTI-inclusive laws: Group-specific provisions
+		</div>
+		<span id="Heading2-2"></span>
+	</div>
+	<div class="compareChart" >
+		<div class="Heading3" tooltip="Equal treatment of LGBTI people: LGB-specific provisions">LGBTI-inclusive laws: LGB-specific provisions
+		</div>
+		<span id="Heading3-1"></span>
+	</div>
+	<div class="compareChart" >
+		<div class="metadata" tooltip="Equal treatment of same-sex and different-sex consensual sexual acts">Equal treatment of same-sex and different-sex consensual sexual acts
+		</div>
+		<span id="indicator6"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Ban on conversion therapy">Ban on conversion therapy
+		</div>
+		<span id="indicator7"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Legal recognition of same-sex partnerships">Legal recognition of same-sex partnerships
+		</div>
+		<span id="indicator8"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Equal adoption rights for different-sex and same-sex couple">Equal adoption rights for different-sex and same-sex couples
+		</div>
+		<span id="indicator9"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Equal access to assisted reproductive technology for different-sex and same-sex couples">Equal access to assisted reproductive technology for different-sex and same-sex couples
+		</div>
+		<span id="indicator10"></span>
+	</div>
+</div>
+<div class="sector" id="group-specific">
+	<div class="compareChart" >
+		<div class="Heading3" tooltip="Equal treatment of LGBTI people: TI-specific provisions">LGBTI-inclusive laws: TI-specific provisions
+		</div>
+		<span id="Heading3-2"></span>
+	</div>
+	<div class="compareChart" >
+		<div class="metadata" tooltip="Removing transgender identity from the national classification of diseases">Removing being transgender from the national classification of diseases
+		</div>
+		<span id="indicator11"></span>
+	</div>
+	<div class="compareChart" >
+		<div class="metadata" tooltip="Allowing transgender people to change their gender marker in the civil registry">Allowing transgender people to change their gender marker in the civil registry
+		</div>
+		<span id="indicator12"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Not conditioning legal gender recognition to medical requirements">Not conditioning legal gender recognition on medical requirements
+		</div>
+		<span id="indicator13"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Allowing a non-binary gender option in the civil registry">Allowing a non-binary gender option in the civil registry
+		</div>
+		<span id="indicator14"></span>
+	</div>
+	<div class="compareChart">
+		<div class="metadata" tooltip="Prohibiting medically unnecessary sex-normalising treatment or surgery on intersex">Prohibiting medically unnecessary sex-normalising treatment or surgery on intersex minors
+		</div>
+		<span id="indicator15"></span>
+	</div>
+</div>
+<Br/>
+<div id="source"><a href="" target="_blank">Source</a>.</div>
+
+<Br/>
+<Br/>
+<div id="countryTooltipSetUP" class="hidden">
+              <p><span id="countryTooltip">All</span></p><Br/>
+              <p><span id="valueTooltip">All</span></p><Br/>
+              <!--<p><span id="evoTooltip">All</span></p>
+
+              
+              	<span id="imageTooltip"></span>-->
+              </p><Br/>
+</div>
+</body>
+<script src="libs/d3.v4.min.js"></script>
+<script type="text/javascript">
+
+var overallwidth=document.getElementById("page").offsetWidth;
+var height=45
+var width = overallwidth;
+var sideMargin=width/5;
+var marginLeft=sideMargin;
+
+var marginRight=sideMargin;
+
+var formatNumber = d3.format(".0f");
+
+var format= d3.format(",.1f");
+var	formatter = d3.format(".0%")
+
+var colorScale = d3.scaleOrdinal()
+    .range(["#CC0099","#9C4174","#6A189D"])
+    .domain(["All provisions","General provisions", "Group-specific provisions"]);
+
+function pickSector(topicSelected){
+	if(topicSelected=="Heading1") 
+		return "All provisions";
+	else if (topicSelected == "Heading2-1" || topicSelected == "indicator1" || topicSelected == "indicator2" || topicSelected == "indicator3" || topicSelected == "indicator4" || topicSelected == "indicator5")
+		return "General provisions";
+	else
+		return "Group-specific provisions";
+};
+
+
+var x = d3.scaleLinear()
+	//.domain([0,100])
+    .rangeRound([marginLeft, width-marginRight]);
+
+/*var legend = d3.select("#Performers")
+	    	.append("svg")
+	    	.attr("width", width)
+	    	.attr("height",height/2);
+
+legend.append("text")
+.attr("x",width-marginRight)
+.attr("y",height/2.5)
+.attr("class","TitleSection")
+.attr("text-anchor","middle")
+.text("Top Performer")
+
+legend.append("text")
+.attr("x",marginLeft)
+.attr("y",height/2.5)
+.attr("class","TitleSection")
+.attr("text-anchor","middle")
+.text("Bottom Performer");*/
+
+function createComparison(topicSelected,countrySel){
+test="#"+topicSelected;
+	d3.selectAll(test)
+		.selectAll("*")
+		.remove();
+
+	var idTopic="#"+topicSelected;
+	var IDChart="ID"+topicSelected;
+
+
+	var compChart=d3.select(idTopic)
+	    	.append("svg")
+	    	.attr("id",topicSelected)
+	    	.attr("width", width)
+	    	.attr("height",height)
+	  		.append("g")
+	    	.attr("class","compChart")
+	    	.attr("transform", "translate(" + 0 + "," + 0 + ")");
+
+	d3.tsv("data/data.tsv", function(error, dataTot) {
+		var data =[];
+		var yTopic="Y"+topicSelected;
+		var evoTopic="evo"+topicSelected;
+
+		dataTot.forEach(function(d,i) {
+			if(d[topicSelected]!=""){
+				data.push( {
+					ISO:d.ISO,
+	    			Country: d.Country,
+					value: d[topicSelected],
+					topic: topicSelected
+	    			//yearData:d[yTopic],
+	    			//evoData:d[evoTopic]
+	  			})
+	  		}	
+		});
+		
+
+		var minValue=0,maxValue=1;
+		var min=d3.min(data,function(d){return parseFloat(d.value)})
+		var max = d3.max(data,function (d) { return parseFloat(d.value) })
+		x.domain([0,1]) ;
+
+
+		compChart.append("line")
+			.attr("x1",x(minValue))
+			.attr("y1",height/2)
+			.attr("x2",x(maxValue))
+			.attr("y2",height/2)
+	      	.style("stroke", "#00B7B5")
+			  .style("stroke-width","1px");
+		
+		compChart.selectAll("circle")
+			.data([0, 1])
+			.enter().append("circle")
+			.attr("cx",function(d){return x(d)})
+			.attr("cy", height / 2)
+			.attr("r",5)
+			.style("fill", "#00B7B5")
+			.style("stroke-width", "1px");
+
+		var circleGroup = compChart.selectAll("g")
+		    .data(data)
+		    .enter()
+		    .append("g")
+      		.filter(function(d) { return d.ISO==countrySel || d.Country=="OECD"   || d.value == min || d.value == max})
+		    .attr("class", function(d){return d.topic;});
+
+		circleGroup.append("circle")
+		    .attr("cx",function(d){
+		    	if(d.value!=="")
+		    		return x(parseFloat(d.value));})
+		    .attr("cy",height/2)
+			.style("r", function(d){
+				if(d.ISO==countrySel)
+					return 8;
+
+				else if (d.Country=="OECD")
+					return 8;
+
+				else if (d.value == minValue || d.value== maxValue)
+					return 5;
+				else
+					return 8;
+			})
+			.style("fill",function(d){
+				if(d.ISO==countrySel)
+					return "#ff3399"
+				else if (d.Country=="OECD")
+					return "#0082B5"
+				else if (d.value==min || d.value == max)
+					return colorScale(pickSector(d.topic))
+				else
+					return "";
+			})
+			.on("mouseover", function (d) {
+				d3.select(this)
+					.style("opacity", 0.5);
+
+				var xPosition = event.pageX - 20;
+				var yPosition = event.pageY + 15;
+				if (yPosition > window.innerHeight - 200)
+					yPosition = yPosition - 160;
+
+				//Update the tooltip position and value
+
+
+
+				d3.select("#valueTooltip")
+					.text(function () {
+							return formatter(d.value) ;
+					});
+
+				d3.select("#countryTooltipSetUP")
+					.style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#countryTooltip")
+					.text(d.Country);
+
+				d3.select("#countryTooltipSetUP").classed("hidden", false);
+
+
+
+
+			})
+			.on("mouseout", function (d) {
+
+				var sel = document.getElementById('dropDownButton');
+
+
+				d3.select(this)
+					.style("opacity", 1);
+
+				//Hide the tooltip
+				d3.select("#countryTooltipSetUP").classed("hidden", true);
+
+			});
+
+
+		circleGroup.append("text")
+			.attr("class","label")
+			.attr("dx", function(d){
+				    	if(d.value!=="")
+				    		return x(parseFloat(d.value));})
+			.attr("dy",function(d){
+				if(d.ISO==countrySel)
+					return height/2+18;
+				else
+					return height/2-10;
+			})
+			.style("text-anchor","middle")
+			.text(function(d){
+				if (d.ISO == countrySel)
+					return d.Country + " :" + formatter(d.value) ;
+	            else if  ( d.value == min)
+	              return  "min: " + formatter(d.value) ;
+	            else if (d.value == max)
+						return "max: " + formatter(d.value) ;
+				else
+				return d.Country + " :" + formatter(d.value) ;
+	      })
+
+
+
+
+	});
+};
+
+
+
+
+function highlightCountry(codeISO){
+	createComparison("Heading1",codeISO);
+	createComparison("Heading2-1",codeISO);
+	createComparison("indicator1",codeISO);
+	createComparison("indicator2",codeISO);
+	createComparison("indicator3",codeISO);
+	createComparison("indicator4",codeISO);
+	createComparison("indicator5",codeISO);
+	createComparison("Heading2-2",codeISO);
+	createComparison("Heading3-1",codeISO);
+	createComparison("indicator6",codeISO);
+	createComparison("indicator7",codeISO);
+	createComparison("indicator8",codeISO);
+	createComparison("indicator9",codeISO);
+	createComparison("indicator10", codeISO);
+	createComparison("Heading3-2", codeISO);
+	createComparison("indicator11", codeISO);
+	createComparison("indicator12", codeISO);
+	createComparison("indicator13", codeISO);
+	createComparison("indicator14", codeISO);
+	createComparison("indicator15", codeISO);
+}
+
+var e = document.getElementById("dropDownButton");
+var selectedCou = e.options[e.selectedIndex].value;
+
+highlightCountry(selectedCou);
+
+
+
+
+function setupButtons() {
+    d3.select('#toolbar')
+      .selectAll('.button')
+      .on('click', function () {
+        // Remove active class from all buttons
+        d3.selectAll('.button').classed('active', false);
+        // Find the button just clicked
+        var button = d3.select(this);
+
+        // Set it as the active button
+        button.classed('active', true);
+
+        // Get the id of the button
+        var buttonId = button.attr('id');
+		if (buttonId== "radial")
+		window.open("index_radial.html", "_self")
+		else if (buttonId== "table")
+		window.open("index_table.html", "_self")
+
+
+		else if (buttonId== "comparison")
+		window.open("index.html", "_self")
+        // Toggle the bubble chart based on
+        // the currently clicked button.
+        //draw(buttonId);
+      });
+  }  
+    
+  setupButtons();
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51983915-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
