@@ -573,6 +573,7 @@ function createComparison(topicSelected,countrySel){
 				else
 					return 8;
 			})
+
 			.style("fill",function(d){
 				if(d.ISO==countrySel)
 					return "#8e006b"//"#ff3399"
@@ -640,6 +641,18 @@ function createComparison(topicSelected,countrySel){
 			})
 			.style("text-anchor","middle")
 			.style("fill", "#8e006b"/*colorScale(pickSector(topicSelected))*/)
+			.style("font-size",function(d){
+				if (d.ISO == countrySel)
+					return "12px"//"#ff3399"
+				else
+					return "10px";
+			})
+			.style("font-weight", function (d) {
+				if (d.ISO == countrySel)
+					return "600"//"#ff3399"
+				else
+					return "300";
+			})
 			.text(function(d){
 				if (d.ISO == countrySel)
 					return d.Country + ": " + formatter(d.value) ;
