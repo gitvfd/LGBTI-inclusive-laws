@@ -47,7 +47,7 @@ body{
 }
 
 #all{
-	margin-top:10px;
+	margin-top:5px;
   	border-color: #CC0099;
   	border-width: 2px;
 	border-style:solid;
@@ -55,14 +55,14 @@ body{
 }
 #general{
 
-	margin-top:10px;
+	margin-top:5px;
   	border-color: #9C4174;
   	border-width: 2px;
 	border-style:solid;
   	padding:5px;
 }
 #group-specific{
-	margin-top:10px;
+	margin-top:5px;
   	border-color: #6A189D;
   	border-width: 2px;
 	border-style:solid;
@@ -537,7 +537,7 @@ function createComparison(topicSelected,countrySel){
 			.attr("y1",height/2)
 			.attr("x2",x(maxValue))
 			.attr("y2",height/2)
-	      	.style("stroke", "#00B7B5")
+	      	.style("stroke", /*"#00B7B5"*/"#e066c1")
 			  .style("stroke-width","1px");
 		
 		compChart.selectAll("circle")
@@ -545,8 +545,8 @@ function createComparison(topicSelected,countrySel){
 			.enter().append("circle")
 			.attr("cx",function(d){return x(d)})
 			.attr("cy", height / 2)
-			.attr("r",5)
-			.style("fill", "#00B7B5")
+			.attr("r",3)
+			.style("fill",  /*"#00B7B5"*/"#e066c1")
 			.style("stroke-width", "1px");
 
 		var circleGroup = compChart.selectAll("g")
@@ -569,17 +569,17 @@ function createComparison(topicSelected,countrySel){
 					return 8;
 
 				else if (d.value == minValue || d.value== maxValue)
-					return 5;
+					return 8;
 				else
 					return 8;
 			})
 			.style("fill",function(d){
 				if(d.ISO==countrySel)
-					return "#ff3399"
+					return "#8e006b"//"#ff3399"
 				else if (d.Country=="OECD")
 					return "#0082B5"
 				else if (d.value==min || d.value == max)
-					return colorScale(pickSector(d.topic))
+					return "#CC0099"//colorScale(pickSector(d.topic))
 				else
 					return "";
 			})
@@ -639,7 +639,7 @@ function createComparison(topicSelected,countrySel){
 					return height/2-10;
 			})
 			.style("text-anchor","middle")
-			.style("fill", colorScale(pickSector(topicSelected)))
+			.style("fill", "#8e006b"/*colorScale(pickSector(topicSelected))*/)
 			.text(function(d){
 				if (d.ISO == countrySel)
 					return d.Country + " :" + formatter(d.value) ;
@@ -650,7 +650,6 @@ function createComparison(topicSelected,countrySel){
 				else
 				return d.Country + " :" + formatter(d.value) ;
 	      })
-
 
 
 
