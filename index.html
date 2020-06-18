@@ -642,13 +642,13 @@ function createComparison(topicSelected,countrySel){
 			.style("fill", "#8e006b"/*colorScale(pickSector(topicSelected))*/)
 			.text(function(d){
 				if (d.ISO == countrySel)
-					return d.Country + " :" + formatter(d.value) ;
+					return d.Country + ": " + formatter(d.value) ;
 	            else if  ( d.value == min)
 	              return  "min: " + formatter(d.value) ;
 	            else if (d.value == max)
 						return "max: " + formatter(d.value) ;
 				else
-				return d.Country + " :" + formatter(d.value) ;
+				return d.Country + ": " + formatter(d.value) ;
 	      })
 
 
