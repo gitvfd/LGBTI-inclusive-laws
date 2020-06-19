@@ -561,7 +561,7 @@ function createComparison(topicSelected,countrySel){
 		    	if(d.value!=="")
 		    		return x(parseFloat(d.value));})
 		    .attr("cy",height/2)
-			.style("r", function(d){
+			.attr("r", function(d){
 				if(d.ISO==countrySel)
 					return 8;
 
@@ -631,15 +631,33 @@ function createComparison(topicSelected,countrySel){
 		circleGroup.append("text")
 			.attr("class","label")
 			.attr("dx", function(d){
-				    	if(d.value!=="")
-				    		return x(parseFloat(d.value));})
+				if (d.value == min)
+					return x(parseFloat(d.value)) - 10;
+				else if (d.value == max)
+					return x(parseFloat(d.value)) + 10;
+				else if(d.value!=="")
+				    		return x(parseFloat(d.value));
+			})
 			.attr("dy",function(d){
 				if(d.ISO==countrySel)
-					return height/2+18;
+					return height/2 + 18;
+				else if (d.value == min)
+					return height / 2 - 2;
+				else if (d.value == max)
+					return height / 2 - 2;
 				else
 					return height/2-10;
 			})
-			.style("text-anchor","middle")
+			.style("text-anchor",function(d){
+				if (d.ISO == countrySel)
+					return "middle";
+				else if(d.value == min)
+					return "end"
+				else if (d.value == max)
+					return "start";
+				else
+					return "middle";
+			})
 			.style("fill", "#8e006b"/*colorScale(pickSector(topicSelected))*/)
 			.style("font-size",function(d){
 				if (d.ISO == countrySel)
