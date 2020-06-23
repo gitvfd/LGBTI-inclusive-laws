@@ -464,12 +464,7 @@ legal LGBTI-inclusivity OECD-wide.</div>
 <Br/>
 <div id="countryTooltipSetUP" class="hidden">
               <p><span id="countryTooltip">All</span></p><Br/>
-              <p><span id="valueTooltip">All</span></p><Br/>
-              <!--<p><span id="evoTooltip">All</span></p>
-
-              
-              	<span id="imageTooltip"></span>-->
-              </p><Br/>
+              <p><span id="valueTooltip">All</span></p>
 </div>
 </body>
 <script src="libs/d3.v4.min.js"></script>
@@ -549,14 +544,62 @@ function createComparison(topicSelected,countrySel){
 	  			})
 	  		}	
 		});
-		
 
-		var minValue=0,maxValue=1;
-		var min=d3.min(data,function(d){return parseFloat(d.value)})
-		var max = d3.max(data,function (d) { return parseFloat(d.value) })
-		x.domain([0,1])
-			.rangeRound([marginLeft, width - marginRight]); ;
 
+
+		var minValue = 0, maxValue = 1;
+		var min = d3.min(data, function (d) { return parseFloat(d.value) })
+		var max = d3.max(data, function (d) { return parseFloat(d.value) })
+		x.domain([0, 1])
+			.rangeRound([marginLeft, width - marginRight]);;
+
+
+
+		var data2=[];
+		var minEnter=false
+		var maxEnter=false
+		data.forEach(function (d, i) {
+			if (d.ISO == countrySel) {
+				data2.push({
+					Label:"countrySel",
+					ISO: d.ISO,
+					Country: d.Country,
+					value: d.value,
+					topic: d.topic
+				})
+			} 
+			if(d.Country == "OECD"){
+				data2.push({
+					Label: "OECD",
+					ISO: d.ISO,
+					Country: d.Country,
+					value: d.value,
+					topic: d.topic
+				})
+			}  
+			if (d.value == min && !minEnter ) {
+				data2.push({
+					Label: "min",
+					ISO: d.ISO,
+					Country: d.Country,
+					value: d.value,
+					topic: d.topic
+				})
+				minEnter=true
+			}  
+			if (d.value == max && !maxEnter) {
+				data2.push({
+					Label: "max",
+					ISO: d.ISO,
+					Country: d.Country,
+					value: d.value,
+					topic: d.topic
+				})
+				maxEnter=true
+			}
+			
+		});
+		console.log(data2)
 
 		compChart.append("line")
 			.attr("x1",x(minValue))
@@ -576,7 +619,7 @@ function createComparison(topicSelected,countrySel){
 			.style("stroke-width", "1px");
 
 		var circleGroup = compChart.selectAll("g")
-		    .data(data)
+		    .data(data2)
 		    .enter()
 		    .append("g")
       		.filter(function(d) { return d.ISO==countrySel || d.Country=="OECD"   || d.value == min || d.value == max})
@@ -588,18 +631,18 @@ function createComparison(topicSelected,countrySel){
 		    		return x(parseFloat(d.value));})
 		    .attr("cy",height/2)
 			.attr("r", function(d){
-				if(d.ISO==countrySel)
+				if(d.Label=="countrySel")
 					return 8;
 
-				else if (d.Country=="OECD")
+				if (d.Label=="OECD")
 					return 8;
 
-				else if (d.value == minValue || d.value== maxValue)
+				if (d.Label == "min")
 					return 8;
-				else
+				
+				if (d.Label == "max")
 					return 8;
 			})
-
 			.style("fill",function(d){
 				if(d.ISO==countrySel)
 					return "#8e006b"//"#ff3399"
@@ -616,12 +659,10 @@ function createComparison(topicSelected,countrySel){
 
 				var xPosition = event.pageX - 20;
 				var yPosition = event.pageY + 15;
-				if (yPosition > window.innerHeight - 200)
-					yPosition = yPosition - 160;
+				//if (yPosition > window.innerHeight - 200)
+				//	yPosition = yPosition - 160;
 
 				//Update the tooltip position and value
-
-
 
 				d3.select("#valueTooltip")
 					.text(function () {
@@ -659,25 +700,27 @@ function createComparison(topicSelected,countrySel){
 			.attr("dx", function(d){
 
 				if (topicSelected != "indicator2") {
-					if (d.value == min)
+					if (d.Label == "min")
 						return x(parseFloat(d.value)) - 10;
-					else if (d.value == max)
+					if (d.Label == "max")
 						return x(parseFloat(d.value)) + 10;
-					else if(d.value!=="")
+					if(d.Label=="OECD")
 								return x(parseFloat(d.value));
+					if (d.Label == "countrySel")
+						return x(parseFloat(d.value));
 				}else{
 							return x(parseFloat(d.value));
 				}
 			})
 			.attr("dy",function(d){
 				if (topicSelected != "indicator2") {
-					if(d.ISO==countrySel)
+					if(d.Label=="countrySel")
 						return height/2 + 18;
-					else if (d.value == min)
+					if (d.Label == "min")
 						return height / 2 - 2;
-					else if (d.value == max)
+					if (d.Label == "max")
 						return height / 2 - 2;
-					else
+					if (d.Label == "OECD")
 						return height/2-10;
 				} else {
 					if (d.ISO == countrySel)
@@ -689,13 +732,13 @@ function createComparison(topicSelected,countrySel){
 			.style("text-anchor",function(d){
 
 				if (topicSelected != "indicator2") {
-					if (d.ISO == countrySel)
+					if (d.Label == "countrySel")
 						return "middle";
-					else if(d.value == min)
+					if(d.Label == "min")
 						return "end"
-					else if (d.value == max)
+					if (d.Label == "max")
 						return "start";
-					else
+					if (d.Label == "OECD")
 						return "middle";
 				}else{
 					return "middle";
@@ -709,26 +752,26 @@ function createComparison(topicSelected,countrySel){
 					return "10px";
 			})
 			.style("font-weight", function (d) {
-				if (d.ISO == countrySel)
+				if (d.Label == "countrySel")
 					return "600"//"#ff3399"
 				else
-					return "100";
+					return "300";
 			})
 			.text(function(d){
 				if(topicSelected!="indicator2"){
-					if (d.ISO == countrySel)
+					if (d.Label == "countrySel")
 						return d.Country + ": " + formatter(d.value);
-					else if (d.value == min)
+					if (d.Label == "min")
 						return "min: " + formatter(d.value);
-					else if (d.value == max)
+					if (d.Label == "max")
 						return "max: " + formatter(d.value);
-					else
+					if (d.Label == "OECD")
 						return d.Country + ": " + formatter(d.value);
 				}
 				else {
-					if (d.ISO == countrySel)
+					if (d.Label == "countrySel")
 						return d.Country + ": " + formatter(d.value);
-					else if(d.ISO == "OECD")
+					else if(d.Label == "OECD")
 						return d.Country + ": " + formatter(d.value);
 					else
 						return "";
