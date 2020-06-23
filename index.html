@@ -249,6 +249,7 @@ height:15px;
 	font-family: 'Oswald', sans-serif;
 	color:#575757;
   	font-size: 10px;
+	-webkit-font-smoothing: antialiased;
 }      
 
 .datalabel{
@@ -699,9 +700,9 @@ function createComparison(topicSelected,countrySel){
 			})
 			.style("font-weight", function (d) {
 				if (d.ISO == countrySel)
-					return "600"//"#ff3399"
+					return "300"//"#ff3399"
 				else
-					return "300";
+					return "100";
 			})
 			.text(function(d){
 				if(topicSelected!="indicator2"){
