@@ -46,9 +46,16 @@ body{
 	padding-left:1%;
 }
 
-#all{
+#head{
 	margin-top:5px;
   	border-color: #CC0099;
+  	border-width: 2px;
+	border-style:solid;
+  padding:5px;
+}
+#all{
+	margin-top:5px;
+  	border-color: #9C4174;
   	border-width: 2px;
 	border-style:solid;
   padding:5px;
@@ -56,7 +63,7 @@ body{
 #general{
 
 	margin-top:5px;
-  	border-color: #9C4174;
+  	border-color: #6A189D;
   	border-width: 2px;
 	border-style:solid;
   	padding:5px;
@@ -249,6 +256,7 @@ height:15px;
 	font-family: 'Oswald', sans-serif;
 	color:#575757;
   	font-size: 10px;
+	  font-weight:100;
 	-webkit-font-smoothing: antialiased;
 }      
 
@@ -336,12 +344,14 @@ height:15px;
 <div class="sector" id="quantity" >
 	
 </div>
+<div class="sector" id="head">
 	<div class="compareChart">
 		<div class="Heading" tooltip="Legal LGBTI inclusivity related to this component is the arithmetic average of legal LGBTI inclusivity related to the following two components: (i) LGBTI-inclusive laws: General provisions; (ii) LGBTI-inclusive laws: Group-specific provisions.">LGBTI-inclusive laws:
 		All provisions (general and group-specific)
 		</div>
 		<span id="Heading1"></span>
 	</div>
+</div>
 <div class="sector" id="all">
 	<div class="compareChart" >
 		<div class="Heading2" tooltip="Legal LGBTI inclusivity related to this component is the arithmetic average of legal LGBTI inclusivity related to each of the five components of general provisions: (i) Protection of LGBTI people against discrimination; (ii) Protection of LGBTI people's civil liberties; (iii) Protection of LGBTI people against violence; (iv) Protection of LGBTI asylum seekers; (v) LGBTI-inclusive equality body, ombudsman or human rights commission. ">LGBTI-inclusive laws: General provisions
@@ -410,8 +420,8 @@ height:15px;
 		</div>
 		<span id="indicator10"></span>
 	</div>
-</div>
-<div class="sector" id="group-specific">
+<!--</div>
+<div class="sector" id="group-specific">-->
 	<div class="compareChart" >
 		<div class="Heading3" tooltip="Legal LGBTI inclusivity related to this component is the arithmetic average of legal LGBTI inclusivity related to each of the five components of TI-specific provisions: (i) Removing being transgender from the national classification of diseases; (ii) Allowing transgender people to change their gender marker in the civil registry; (iii) Not conditioning legal gender recognition on medical requirements; (iv) Allowing a non-binary gender option in the civil registry; (v) Prohibiting medically unnecessary sex-normalising treatment or surgery on intersex minors. ">LGBTI-inclusive laws: TI-specific provisions
 		</div>
@@ -700,7 +710,7 @@ function createComparison(topicSelected,countrySel){
 			})
 			.style("font-weight", function (d) {
 				if (d.ISO == countrySel)
-					return "300"//"#ff3399"
+					return "600"//"#ff3399"
 				else
 					return "100";
 			})
